@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Love Story 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Great Vibes', cursive;
+      background: #222;
+      overflow: hidden;
+    }
+
+    .scene {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      height: 100vh;
+      animation: fadeIn 2s ease-in-out;
+      padding: 20px;
+    }
+
+    .scene.active {
+      display: flex;
+    }
+
+    .clickable {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .clickable:hover {
+      transform: scale(1.05);
+    }
+
+    .typing {
+      font-size: 1.2rem;
+      font-family: 'Roboto Mono', monospace;
+      white-space: pre-wrap;
+      min-height: 40px;
+      margin-bottom: 10px;
+      animation: slideIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100vh); }
+    }
+
+    .balloon, .heart, .star {
+      position: absolute;
+      bottom: -100px;
+      animation: float 10s linear infinite;
+    }
+
+    .heart {
+      width: 80px;
+      height: 80px;
+      background: #ff3366;
+      clip-path: polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%);
+      animation: heartPulse 1s infinite alternate;
+      z-index: 999;
+    }
+
+    @keyframes heartPulse {
+      0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 51, 102, 0.6); }
+      50% { transform: scale(1.2); box-shadow: 0 0 30px rgba(255, 51, 102, 0.9); }
+      100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 51, 102, 0.6); }
+    }
+
+    .kiss {
+      animation: pulse 1s infinite;
+      font-size: 3rem;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .quote-rotator {
+      font-size: 1.2rem;
+      font-family: 'Roboto Mono', monospace;
+      padding: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .love-quote {
+      font-size: 1.5rem;
+      color: #ff3366;
+      font-family: 'Great Vibes', cursive;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .reveal-name {
+      font-size: 2rem;
+      opacity: 0;
+      animation: nameReveal 3s forwards;
+    }
+
+    @keyframes nameReveal {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .poem {
+      font-size: 1.1rem;
+      font-family: 'Roboto Mono', monospace;
+      padding: 10px;
+      line-height: 1.5;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .fireworks-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 0, 0, 0.7) 20%, transparent 70%);
+      z-index: -1;
+    }
+
+    .heart-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #8B0000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .heart-message {
+      background: #660000;
+      padding: 40px;
+      border-radius: 50%;
+      width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 2.5rem;
+      color: #fff;
+      animation: heartBeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Music Control Buttons */
+    #music-controls {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 1000;
+    }
+
+    #music-controls button {
+      background: #ff3366;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin: 2px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #music-controls button:hover {
+      background: #e62e5c;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating Balloons -->
+<img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:10%;" />
+<img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:30%;" />
+<img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:50%;" />
+<img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:70%;" />
+<img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:90%;" />
+<img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:1%;" />
+
+<!-- Scenes -->
+<div class="scene active" id="scene1" onclick="nextScene(1)">
+  <img src="https://i.postimg.cc/g2Jsh97x/envelope-11546676482nhud8yhu0a-removebg-preview.png" class="clickable" style="width:120px;"/>
+  <p>Tap to open your magical letter 💌</p>
+</div>
+
+<div class="scene" id="scene2" onclick="nextScene(2)">
+  <img src="https://i.postimg.cc/d3CjjXZG/Love-You-Very-Much-GIF.gif" style="width:1300px; height: 1200px;"/>
+  <p id="para1" class="typing"></p>
+  <p id="para2" class="typing"></p>
+  <p id="para3" class="typing"></p>
+  <p>Tap anywhere to continue ➡️</p>
+</div>
+
+<div class="scene" id="scene3" onclick="nextScene(3)">
+  <div class="quote-rotator" id="quote">"You are the reason I believe in magic of love <br> Beta ji i love you sooooooooooooooooooooooo much . ✨"</div>
+  <p>Click to see who’s behind the magic... 🪄</p>
+</div>
+
+<div class="scene" id="scene4" onclick="nextScene(4)">
+  <div class="reveal-name">Yours forever, <b>lucci lomdi biscute Gomzee 💖</b></div>
+  <p>Tap to seal it with a kiss 💋</p>
+</div>
+
+<div class="scene" id="scene5" onclick="nextScene(5)">
+  <div class="kiss">💋🥺XOXO❤️🐻</div>
+  <p>Tap to read a poem I wrote for you... 📝</p>
+</div>
+
+<div class="scene" id="scene6" onclick="nextScene(6)">
+  <h2>🌹 A Love Poem 🌹</h2>
+  <div class="poem">
+    In your eyes, I find my home,<br>
+    In your heart, I’ve come to roam.<br>
+    Through every storm and gentle breeze,<br>
+    You are my calm, my sweetest peace.<br><br>
+    With every step and every mile,<br>
+    I live to see your lovely smile.<br>
+    So here's my vow and gentle plea—<br>
+    Forevermore, just you and me. 💖
+  </div>
+  <p>Click for a surprise voice message 🎧</p>
+</div>
+
+<div class="scene" id="scene7" onclick="nextScene(7)">
+  <audio controls>
+    <source src="20250425_104759.aac" type="audio/mpeg">
+  </audio>
+  <p>Click to view our best moments 📸</p>
+</div>
+
+<div class="scene" id="scene8" onclick="nextScene(8)">
+  <div id="slideshow">
+    <img class="slide active" src="photo1.jpg" style="width: 250px;"/>
+    <img class="slide" src="photo2.jpg" style="width: 450px;" />
+    <img class="slide" src="photo3.jpg" style="width: 450px;"/>
+  </div>
+  <p>Click to watch our little movie 🎥</p>
+</div>
+
+<div class="scene" id="scene9" onclick="nextScene(9)">
+  <video width="320" height="240" controls autoplay>
+    <source src="video1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p>Tap to end with fireworks! 🎆</p>
+</div>
+
+<div class="scene" id="scene10">
+  <div class="fireworks-overlay"></div>
+  <p style="font-size:1.5rem; color: white; font-weight: bold;">
+    Happy 3rd Anniversary! 🎉💖
+  </p>
+  <div class="heart"></div>
+</div>
+
+<!-- Background Music with Play/Pause -->
+<div id="music-controls">
+  <button onclick="playMusic()">▶️ Play Music</button>
+  <button onclick="pauseMusic()">⏸️ Pause Music</button>
+</div>
+
+<audio id="bgMusic">
+  <source src="Jhol(KoshalWorld.Com).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const paragraphs = [
+    "My dearest BHALU,",
+    "Every moment with you is like a warm summer dream wrapped in moonlight. Your laughter is my favorite sound, your smile my favorite sight. 🌙",
+    "We've created magic together, and I wouldn’t trade a single second of it for anything. Here's to our never-ending love... 💖"
+  ];
+
+  let paraIndex = 0;
+  function typeText() {
+    let para = document.getElementById("para" + (paraIndex + 1));
+    let text = paragraphs[paraIndex];
+    let index = 0;
+    para.innerHTML = '';
+    let typingInterval = setInterval(() => {
+      para.innerHTML += text.charAt(index);
+      index++;
+      if (index === text.length) {
+        clearInterval(typingInterval);
+        paraIndex++;
+        if (paraIndex < paragraphs.length) {
+          setTimeout(typeText, 2000);
+        }
+      }
+    }, 100);
+  }
+
+  function nextScene(sceneNumber) {
+    document.getElementById('scene' + sceneNumber).classList.remove('active');
+    document.getElementById('scene' + (sceneNumber + 1)).classList.add('active');
+    if (sceneNumber === 2) {
+      typeText();
+    }
+  }
+
+  function playMusic() {
+    document.getElementById("bgMusic").play();
+  }
+
+  function pauseMusic() {
+    document.getElementById("bgMusic").pause();
+  }
+</script>
+
+</body>
+</html>
