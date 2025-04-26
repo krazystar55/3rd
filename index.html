@@ -2,177 +2,209 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Love Story 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Great Vibes', cursive;
-      background: #222;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to top right, #ffdde1, #ee9ca7);
       overflow: hidden;
+      color: #fff;
+      text-align: center;
+      position: relative;
     }
-
+    h1, h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+    }
+    p, .quote-rotator, .reveal-name, .poem {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.25rem;
+    }
     .scene {
       display: none;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       height: 100vh;
-      animation: fadeIn 2s ease-in-out;
       padding: 20px;
+      animation: fadeIn 2s ease-in-out;
     }
-
     .scene.active {
       display: flex;
     }
-
-    .clickable {
+    .button, .clickable {
+      padding: 10px 20px;
+      font-size: 18px;
+      background: #ff69b4;
+      border: none;
+      color: white;
+      border-radius: 12px;
       cursor: pointer;
+      margin-top: 20px;
       transition: transform 0.3s ease;
     }
-
     .clickable:hover {
       transform: scale(1.05);
     }
-
-    .typing {
-      font-size: 1.2rem;
-      font-family: 'Roboto Mono', monospace;
-      white-space: pre-wrap;
-      min-height: 40px;
-      margin-bottom: 10px;
-      animation: slideIn 1s ease forwards;
+    /* Floating Balloons */
+    .balloon {
+      position: absolute;
+      width: 60px;
+      top: 100%;
+      animation: floatUp 10s linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
     }
 
+    /* Typing Text */
+    .typing-text {
+      width: 60%;
+      margin: auto;
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 4s steps(40, end), blink .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 60%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
-    @keyframes slideIn {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-100vh); }
-    }
-
-    .balloon, .heart, .star {
-      position: absolute;
-      bottom: -100px;
-      animation: float 10s linear infinite;
-    }
-
-    .heart {
-      width: 80px;
-      height: 80px;
-      background: #ff3366;
-      clip-path: polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%);
-      animation: heartPulse 1s infinite alternate;
-      z-index: 999;
-    }
-
-    @keyframes heartPulse {
-      0% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 51, 102, 0.6); }
-      50% { transform: scale(1.2); box-shadow: 0 0 30px rgba(255, 51, 102, 0.9); }
-      100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 51, 102, 0.6); }
-    }
-
-    .kiss {
-      animation: pulse 1s infinite;
-      font-size: 3rem;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-    .quote-rotator {
-      font-size: 1.2rem;
-      font-family: 'Roboto Mono', monospace;
-      padding: 20px;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    .love-quote {
-      font-size: 1.5rem;
-      color: #ff3366;
-      font-family: 'Great Vibes', cursive;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .reveal-name {
-      font-size: 2rem;
-      opacity: 0;
-      animation: nameReveal 3s forwards;
-    }
-
-    @keyframes nameReveal {
-      0% { opacity: 0; transform: scale(0.5); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    .poem {
-      font-size: 1.1rem;
-      font-family: 'Roboto Mono', monospace;
-      padding: 10px;
-      line-height: 1.5;
-      animation: fadeIn 2s ease-in-out;
-    }
-
+    /* Fireworks Overlay */
     .fireworks-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(255, 0, 0, 0.7) 20%, transparent 70%);
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('https://media.giphy.com/media/l0HlNQ03J5JxX6lva/giphy.gif') center/cover no-repeat;
       z-index: -1;
     }
 
-    .heart-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background: #8B0000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    /* Real Heart Shape */
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: #ff3366;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: rotate(-45deg);
+      animation: floatHeart 12s linear infinite, heartPulse 1.5s ease-in-out infinite;
     }
-
-    .heart-message {
-      background: #660000;
-      padding: 40px;
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: #ff3366;
       border-radius: 50%;
-      width: 300px;
-      height: 300px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-size: 2.5rem;
+      position: absolute;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes floatHeart {
+      0% {
+        transform: translate(0, 0) rotate(-45deg);
+        opacity: 1;
+      }
+      25% {
+        transform: translate(-30px, -30vh) rotate(-45deg);
+      }
+      50% {
+        transform: translate(30px, -60vh) rotate(-45deg);
+      }
+      75% {
+        transform: translate(-20px, -90vh) rotate(-45deg);
+      }
+      100% {
+        transform: translate(20px, -120vh) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1) rotate(-45deg); }
+      50% { transform: scale(1.2) rotate(-45deg); }
+    }
+
+    /* Rainbow Heart Colors */
+    .heart:nth-child(odd) {
+      background: linear-gradient(to right, #ff3366, #ff9966);
+    }
+    .heart:nth-child(2) {
+      background: linear-gradient(to right, #ff3366, #ff69b4);
+    }
+    .heart:nth-child(3) {
+      background: linear-gradient(to right, #ff3366, #ff8c00);
+    }
+    .heart:nth-child(4) {
+      background: linear-gradient(to right, #ff3366, #ffd700);
+    }
+    .heart:nth-child(5) {
+      background: linear-gradient(to right, #ff3366, #32cd32);
+    }
+
+    /* Happy 3rd Anniversary Animation */
+    .happy-anniversary {
+      font-size: 2rem;
+      font-weight: bold;
       color: #fff;
-      animation: heartBeat 1.5s ease-in-out infinite;
+      animation: bounceIn 2s ease-in-out, sparkleEffect 1s infinite;
     }
 
-    @keyframes heartBeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+    @keyframes bounceIn {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
 
-    /* Music Control Buttons */
+    @keyframes sparkleEffect {
+      0%, 100% { text-shadow: 0 0 10px rgba(255, 105, 180, 1), 0 0 20px rgba(255, 105, 180, 1), 0 0 30px rgba(255, 105, 180, 1); }
+      50% { text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 1); }
+    }
+
+    /* Handwritten Paragraph */
+    .handwritten {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      line-height: 1.8;
+      color: #fff;
+      opacity: 0;
+      animation: handwritingEffect 6s ease-in-out forwards;
+      width: 80%;
+      margin: 20px auto;
+    }
+
+    @keyframes handwritingEffect {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    /* Music Controls */
     #music-controls {
       position: fixed;
       bottom: 10px;
       right: 10px;
       z-index: 1000;
     }
-
     #music-controls button {
       background: #ff3366;
       color: white;
@@ -183,52 +215,61 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     #music-controls button:hover {
       background: #e62e5c;
     }
+
+    #slideshow .slide {
+      display: none;
+    }
+    #slideshow .active {
+      display: inline-block;
+    }
   </style>
 </head>
-<body>
 
-<!-- Floating Balloons -->
+<body onclick="nextScene()">
+
+<!-- BALLOONS -->
 <img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:10%;" />
 <img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:30%;" />
 <img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:50%;" />
 <img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:70%;" />
 <img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:90%;" />
-<img src="https://i.postimg.cc/hGRH1tRC/e152847d1a85255503478f8d02d2a11b-removebg-preview.png" class="balloon" style="left:1%;" />
+
+<!-- HEARTS -->
+<div class="heart" style="left:10%; animation-delay: 0s; width: 30px; height: 30px;"></div>
+<div class="heart" style="left:30%; animation-delay: 2s; width: 25px; height: 25px;"></div>
+<div class="heart" style="left:50%; animation-delay: 4s; width: 35px; height: 35px;"></div>
+<div class="heart" style="left:70%; animation-delay: 6s; width: 28px; height: 28px;"></div>
+<div class="heart" style="left:90%; animation-delay: 8s; width: 32px; height: 32px;"></div>
 
 <!-- Scenes -->
-<div class="scene active" id="scene1" onclick="nextScene(1)">
+<div class="scene active" id="scene1">
   <img src="https://i.postimg.cc/g2Jsh97x/envelope-11546676482nhud8yhu0a-removebg-preview.png" class="clickable" style="width:120px;"/>
   <p>Tap to open your magical letter 💌</p>
 </div>
 
-<div class="scene" id="scene2" onclick="nextScene(2)">
-  <img src="https://i.postimg.cc/d3CjjXZG/Love-You-Very-Much-GIF.gif" style="width:1300px; height: 1200px;"/>
-  <p id="para1" class="typing"></p>
-  <p id="para2" class="typing"></p>
-  <p id="para3" class="typing"></p>
-  <p>Tap anywhere to continue ➡️</p>
+<div class="scene" id="scene2">
+  <h1>Hey Love ❤️</h1>
+  <p class="typing-text">Welcome to the story of us...</p>
 </div>
 
-<div class="scene" id="scene3" onclick="nextScene(3)">
-  <div class="quote-rotator" id="quote">"You are the reason I believe in magic of love <br> Beta ji i love you sooooooooooooooooooooooo much . ✨"</div>
-  <p>Click to see who’s behind the magic... 🪄</p>
+<div class="scene" id="scene3">
+  <h1>Our Beginning 🌸</h1>
+  <p class="typing-text">It all started with a smile... and soon, you had my heart.</p>
 </div>
 
-<div class="scene" id="scene4" onclick="nextScene(4)">
-  <div class="reveal-name">Yours forever, <b>lucci lomdi biscute Gomzee 💖</b></div>
-  <p>Tap to seal it with a kiss 💋</p>
+<div class="scene" id="scene4">
+  <div class="quote-rotator">"You are the reason I believe in the magic of love ✨"</div>
 </div>
 
-<div class="scene" id="scene5" onclick="nextScene(5)">
-  <div class="kiss">💋🥺XOXO❤️🐻</div>
-  <p>Tap to read a poem I wrote for you... 📝</p>
+<div class="scene" id="scene5">
+  <h1>You + Me = Forever 💖</h1>
+  <div class="reveal-name">GAUTAM ❤️ CHAITALI</div>
 </div>
 
-<div class="scene" id="scene6" onclick="nextScene(6)">
+<div class="scene" id="scene6">
   <h2>🌹 A Love Poem 🌹</h2>
   <div class="poem">
     In your eyes, I find my home,<br>
@@ -240,93 +281,93 @@
     So here's my vow and gentle plea—<br>
     Forevermore, just you and me. 💖
   </div>
-  <p>Click for a surprise voice message 🎧</p>
 </div>
 
-<div class="scene" id="scene7" onclick="nextScene(7)">
+<div class="scene" id="scene7">
   <audio controls>
     <source src="20250425_104759.aac" type="audio/mpeg">
   </audio>
-  <p>Click to view our best moments 📸</p>
 </div>
 
-<div class="scene" id="scene8" onclick="nextScene(8)">
+<div class="scene" id="scene8">
   <div id="slideshow">
     <img class="slide active" src="photo1.jpg" style="width: 250px;"/>
-    <img class="slide" src="photo2.jpg" style="width: 450px;" />
+    <img class="slide" src="photo2.jpg" style="width: 450px;"/>
     <img class="slide" src="photo3.jpg" style="width: 450px;"/>
   </div>
-  <p>Click to watch our little movie 🎥</p>
 </div>
 
-<div class="scene" id="scene9" onclick="nextScene(9)">
+<div class="scene" id="scene9">
   <video width="320" height="240" controls autoplay>
     <source src="video1.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
-  <p>Tap to end with fireworks! 🎆</p>
 </div>
 
 <div class="scene" id="scene10">
   <div class="fireworks-overlay"></div>
-  <p style="font-size:1.5rem; color: white; font-weight: bold;">
-    Happy 3rd Anniversary! 🎉💖
-  </p>
-  <div class="heart"></div>
+  <p class="happy-anniversary">Happy 3rd Anniversary! 🎉💖</p>
+  <p class="handwritten">Mera bacha 🥺💋❤‍🩹
+
+    Sorry Baby 
+    
+    Hey, Breath Breath 🫁
+    
+    It's okay betu 
+    
+    Remember we date 
+    It's actually about loyalty over love ❤ 😘 
+    
+    I'm not leaving you over an argument 🐻💕
+    
+    I'm not leaving because you still have unhealed wounds 💗
+    
+    I'm not leaving because you messed up 💀
+    
+    I'm not leaving because you sometimes say the wrong things 👠💋❤‍🩹 
+    
+    I'm not leaving because nobody showed us how to properly communicate 👾
+    
+    We will Learn together ❤💋❤‍🩹
+    
+    Just be honest with me 🫂💗
+    
+    I lobeeee uhhhhhh so much 🥺😭❤‍🩹
+    
+    I'll see you soon 🥺💗🫂
+    
+    Meet me soon mera bacha 🥺💋❤‍🩹🫂
+     
+    I loveeeeeeeeee youuuuuuuu meraaaaaaaaaa bachaaaaaaaa, now and alwaysssssssssss. 💖</p>
 </div>
 
-<!-- Background Music with Play/Pause -->
+<!-- MUSIC CONTROLS -->
 <div id="music-controls">
   <button onclick="playMusic()">▶️ Play Music</button>
   <button onclick="pauseMusic()">⏸️ Pause Music</button>
 </div>
-
 <audio id="bgMusic">
   <source src="Jhol(KoshalWorld.Com).mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  const paragraphs = [
-    "My dearest BHALU,",
-    "Every moment with you is like a warm summer dream wrapped in moonlight. Your laughter is my favorite sound, your smile my favorite sight. 🌙",
-    "We've created magic together, and I wouldn’t trade a single second of it for anything. Here's to our never-ending love... 💖"
-  ];
-
-  let paraIndex = 0;
-  function typeText() {
-    let para = document.getElementById("para" + (paraIndex + 1));
-    let text = paragraphs[paraIndex];
-    let index = 0;
-    para.innerHTML = '';
-    let typingInterval = setInterval(() => {
-      para.innerHTML += text.charAt(index);
-      index++;
-      if (index === text.length) {
-        clearInterval(typingInterval);
-        paraIndex++;
-        if (paraIndex < paragraphs.length) {
-          setTimeout(typeText, 2000);
-        }
-      }
-    }, 100);
+  let currentScene = 0;
+  const scenes = document.querySelectorAll('.scene');
+  function nextScene() {
+    scenes[currentScene].classList.remove('active');
+    currentScene = (currentScene + 1) % scenes.length;
+    scenes[currentScene].classList.add('active');
   }
 
-  function nextScene(sceneNumber) {
-    document.getElementById('scene' + sceneNumber).classList.remove('active');
-    document.getElementById('scene' + (sceneNumber + 1)).classList.add('active');
-    if (sceneNumber === 2) {
-      typeText();
-    }
-  }
-
+  // Music Controls
   function playMusic() {
-    document.getElementById("bgMusic").play();
+    document.getElementById('bgMusic').play();
   }
 
   function pauseMusic() {
-    document.getElementById("bgMusic").pause();
+    document.getElementById('bgMusic').pause();
   }
-</script>
 
+</script>
 </body>
 </html>
